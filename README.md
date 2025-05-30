@@ -52,9 +52,12 @@ npm start
 Create a `.env` file in the root directory and add the following:
 
 ```env
-PORT=3000
-MONGODB_URI=your_mongodb_uri
-JWT_SECRET=your_jwt_secret
+MONGO_URI= YOUR_DAYABASE_URL
+CLOUDINARY_NAME= YOUR_CLOUD_NAME
+CLOUDINARY_API= CLOUD_API_KEY
+CLOUDINARY_SECRET= CLOUD_API_SECRET
+JWT_SECRET= YOUR_TOKEN_SECRET
+SESSION_SECRET= YOUR_SESSION_SECRET
 ```
 
 ## 📁 Project Structure
