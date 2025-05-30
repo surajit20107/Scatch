@@ -1,0 +1,23 @@
+.btn-container {
+  display: flex;
+  margin-top: 2rem;
+  flex-direction: column;
+}
+.btn-container a {
+  margin: 12px;
+  padding: 1em 0;
+  color: white;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  text-align: center;
+  background-color: #00a0ff;
+}
+
+.btn-container a:hover {
+  background-color: #41bef0;
+}
+
+#admin-name {
+  font-size: 1.2rem;
+}

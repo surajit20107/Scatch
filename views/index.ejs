@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatch | Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-[#F1F1F1]">
+    
+<!-- display the error message -->
+<% if(errorMessage.length > 0) { %>
+    <div class="toast-container toast-error">
+        <%= errorMessage[0] %>
+    </div>
+   <% } %>
+
+<% if(successMessage.length > 0) { %>
+    <div class="toast-container toast-success">
+        <%= successMessage[0] %>
+    </div>
+   <% } %>
+       
+    <div class="h-screen w-full flex justify-center mt-24">
+
+        <div class="shadow-card rounded-md h-96 w-72 bg-[#FFFFFF]">
+            <div class="flex justify-center">
+                <i class="mt-6 text-2xl fa-solid fa-right-to-bracket" style="color: #6e6eff;"></i>
+            </div>
+            <div class="mt-2 text-center font-bold text-xl">Welcome!</div>
+            <div class="text-center tracking-tight opacity-[0.4] mt-2">Sign in to your account</div>
+            <form action="/user/login" method="post" class="flex flex-col">
+                <input class="outline-none border-b border-zinc-400 p-2 mt-6 mx-4" type="email" placeholder="Email address..." name="email" required>
+                <input class="block outline-none border-b border-zinc-400 p-2 mt-6 mx-4" type="password" placeholder="Password..." name="password" required>
+            <div class="flex justify-end mx-4 text-blue-600">
+                <a href="/user/signup" class="mt-4 text-right mx-4">Sign up</a>
+            </div>
+            <input class="block bg-blue-600 text-white px-5 py-2 mx-auto rounded-md mt-4" type="submit" value="Login">
+            </form>
+        </div>
+    </div>
+</body>
+<script>
+    setTimeout(() => {
+        const toast = document.querySelector(".toast-container")
+        if (toast) toast.remove()
+    }, 3000)
+</script>
+</html>

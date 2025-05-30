@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatch | Manage Users</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+</head>
+<body>
+
+<% if(errorMessage.length > 0){ %>
+    <div class="toast-container toast-error">
+        <%= errorMessage %>
+    </div>
+<% } %>
+
+    <% if(successMessage.length > 0){ %>
+    <div class="toast-container toast-success">
+        <%= successMessage %>
+    </div>
+<% } %>
+    
+    <%- include("./partials/adminNav") %>
+<div class="h-full w-full">
+    <div class="mx-4 mt-3 font-bold">
+        Total users: <%= allUsers.length %>
+    </div>
+    <div class="mb-12 overflow-scroll">
+    <table class="mt-6 table-auto w-full border-collapse border border-gray-300">
+        <thead>
+            <tr class="bg-red-500 text-white">
+                <th class="border border-gray-300 px-4 py-2 w-1/3">Name</th>
+                <th class="border border-gray-300 px-4 py-2 w-1/3">Email</th>
+                <th class="border border-gray-300 px-4 py-2 w-1/6">Banned</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% allUsers.map((user) => { %>
+                <tr class="hover:bg-red-100">
+                    <td class="border border-gray-300 px-4 py-2 w-1/3 truncate max-w-xs overflow-scroll"><%= user.name %></td>
+                    <td class="border border-gray-300 px-4 py-2 w-1/3 truncate max-w-xs overflow-scroll"><%= user.email %></td>
+                    <td class="border border-gray-300 px-4 py-2 text-center"><%= user.banned %>
+                        
+    <div>
+        <a href="/user/toggle-status/<%= user._id %>">
+        <button class="bg-red-600 text-white px-3 py-1 my-2 rounded-lg">
+        <%= user.ban ? "Unban" : " Ban " %>
+        </button>
+        </a>
+    </div>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    </div>
+</div>
+</body>
+<script>
+    setTimeout(()=>{
+        const toast = document.querySelector(".toast-container")
+        if (toast) toast.remove()
+    }, 3000)
+</script>
+</html>

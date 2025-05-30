@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profile | Scatch</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-grey-50 min-h-screen items-start font-sans text-grey-800">
+    <!-- renders the navbar -->
+  <%- include("./partials/navbar2") %> 
+  
+  <main class="w-full mx-auto max-w-3xl rounded-3xl shadow-lg p-8 mt-6">
+    <h1 class="text-center text-3xl font-extrabold text-blue-700 mb-10">Account Settings</h1>
+
+    <!-- Avatar Section -->
+    <section aria-label="Avatar section" class="flex flex-col items-center mb-14">
+        <img id="avatarPreview" src="<%= user.image %>" alt="User Avatar" tabindex="0" class="w-32 h-32 rounded-full border-4 border-blue-500 object-cover shadow-md cursor-pointer transition-transform hover:scale-105" />
+      <input type="file" id="avatarInput" name="avatar" accept="image/*" aria-label="Change avatar upload" class="hidden" />
+      <label for="avatarInput" tabindex="0" class="mt-4 px-6 py-2 bg-blue-600 hover:bg-blue-700 transition-colors text-white font-semibold rounded-full shadow-md cursor-pointer select-none">Change Avatar</label>
+      <p id="avatarMsg" role="alert" aria-live="polite" class="mt-2 text-sm text-green-600 hidden"></p>
+    </section>
+
+    <!-- Change Password Form -->
+    <form 
+      action="/user/change-password"
+      method="post"
+      id="passwordForm" aria-label="Change password form" novalidate class="mb-14 space-y-6">
+      <h2 class="text-xl font-bold border-b-4 border-blue-500 pb-2 text-gray-800">Change Password</h2>
+      <div>
+        <label for="currentPassword" class="block mb-1 font-semibold text-gray-700">Current Password</label>
+        <input type="password" id="currentPassword" name="currentPassword" required autocomplete="current-password" placeholder="Enter current password"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div>
+        <label for="newPassword" class="block mb-1 font-semibold text-gray-700">New Password</label>
+        <input type="password" id="newPassword" name="newPassword" required autocomplete="new-password" placeholder="Enter new password"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div>
+        <label for="confirmPassword" class="block mb-1 font-semibold text-gray-700">Confirm New Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required autocomplete="new-password" placeholder="Confirm new password"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div class="flex justify-center">
+      <button type="submit" class="w-3/4 md:w-2/4 bg-blue-600 hover:bg-blue-700 transition-colors text-white font-bold py-3 rounded-full shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
+        Update Password
+      </button>
+      </div>
+      <p id="passwordMsg" role="alert" aria-live="polite" class="mt-2 text-sm text-green-600 hidden"></p>
+    </form>
+
+    <!-- Address Form -->
+    <form action="/user/update-address" method="post" id="addressForm" aria-label="Update or add address form" class="mb-14 space-y-6">
+      <h2 class="text-xl font-bold border-b-4 border-blue-500 pb-2 text-gray-800">Address</h2>
+      <div>
+        <label for="addressLine1" class="block mb-1 font-semibold text-gray-700">Address Line 1</label>
+        <input 
+          type="text"
+          id="addressLine1"
+          name="add1"
+          required
+          value="<%= user.address.addressLine1 %>"
+          placeholder="Street address or P.O. Box"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div>
+        <label for="addressLine2" class="block mb-1 font-semibold text-gray-700">Address Line 2 <span class="text-gray-400 text-sm">(Optional)</span></label>
+        <input 
+          type="text"
+          id="addressLine2"
+          name="add2"
+          required
+          value="<%= user.address.addressLine2 %>"
+          placeholder="Apartment, suite, unit, building, floor, etc."
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div class="flex items-end space-x-2">
+      <div class="flex-1">
+        <label for="city" class="block mb-1 font-semibold text-gray-700">City</label>
+        <input 
+          type="text" 
+          id="city"
+          name="city"
+          required
+          value="<%= user.address.city %>"
+          placeholder="City name"
+          class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      <div>
+        <label for="zipCode" class="block mb-1 font-semibold text-gray-700">Pin Code</label>
+        <input 
+          type="number"
+          id="zipCode"
+          name="pincode"
+          required
+          value="<%= user.address.pin %>"
+          placeholder="Pin code"
+          class="w-28 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      </div>
+      </div>
+      <div>
+        <label for="state" class="block mb-1 font-semibold text-gray-700">State/Province/Region</label>
+        <select
+          id="state"
+          name="state"
+          required
+          value="<%= user.address.state %>"
+          class="bg-gray-50 border border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+          <option value="" selected>Choose a country</option>
+          <option value="US">United States</option>
+    <option value="CA">Canada</option>
+    <option value="FR">France</option>
+    <option value="DE">Germany</option>
+        </select>
+      </div>
+      <div class="flex justify-center">
+      <button type="submit" class="w-3/4 md:w-2/4 bg-blue-600 hover:bg-blue-700 transition-colors text-white font-bold py-3 rounded-full shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-300">
+        Save Address
+      </button>
+      </div>
+      <p id="addressMsg" role="alert" aria-live="polite" class="mt-2 text-sm text-green-600 hidden">
+        <!-- response msg -->
+      </p>
+    </form>
+
+    <!-- Logout Button -->
+    <div class="flex justify-center">
+    <button id="logoutBtn" aria-label="Logout from your account" class="w-3/4 md:w-2/4 bg-red-600 hover:bg-red-700 transition-colors text-white font-bold py-3 rounded-full shadow-lg focus:outline-none focus:ring-4 focus:ring-red-300">
+      Logout
+    </button>
+    </div>
+  </main>
+
+
+<script>
+  // Show message helper
+  function showMessage(element, text, isError = false) {
+    element.textContent = text;
+    element.classList.remove('hidden');
+    element.classList.toggle('text-green-600', !isError);
+    element.classList.toggle('text-red-600', isError);
+    setTimeout(() => {
+      element.classList.add('hidden');
+      element.textContent = '';
+    }, 4000);
+  }
+
+  const avatarInput = document.getElementById('avatarInput');
+  const avatarPreview = document.getElementById('avatarPreview');
+  const avatarMsg = document.getElementById('avatarMsg');
+
+  // Image preview and upload
+  avatarInput.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      showMessage(avatarMsg, 'Please upload a valid image file.', true);
+      return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      showMessage(avatarMsg, 'Image size should not exceed 2 MB.', true);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = async function (event) {
+      avatarPreview.src = event.target.result;
+
+      // Send image to backend
+      const formData = new FormData();
+      formData.append('avatar', file);
+
+      try {
+        const response = await fetch('/upload-avatar', {
+          method: 'POST',
+          body: formData,
+        });
+        
+        if (!response.ok) {
+          throw new Error('Upload failed');
+        }
+
+        showMessage(avatarMsg, 'Avatar uploaded successfully!');
+      } catch (err) {
+        showMessage(avatarMsg, 'Failed to upload avatar.', true);
+        console.error(err);
+      }
+    };
+
+    reader.onerror = () => {
+      showMessage(avatarMsg, 'Failed to read the image file.', true);
+    };
+
+    reader.readAsDataURL(file);
+  });
+
+  // Keyboard accessibility for avatar upload
+  avatarPreview.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      avatarInput.click();
+    }
+  });
+
+      // Logout Button
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn.addEventListener('click', () => {
+      if(confirm('Are you sure you want to logout?')) {
+        window.location.href="/logout"
+      }
+    });
+
+  const form = document.querySelector("#addressForm")
+
+  
+  
+</script>
+</body>
+</html>
+

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatch | Admin Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-[#F1F1F1]">
+<div class="h-screen w-full flex flex-col items-center">
+    <div class="mt-16 shadow-lg h-[28rem] w-80 bg-[#FFFFFF] rounded-lg">
+    <form action="/owner/admin/create" method="post" class="flex flex-col justify-center">
+        <div class="text-center text-2xl font-bold mt-16">WELCOME</div>
+        <div class="text-center mt-2"><i class="text-5xl fa-solid fa-square-a"></i></div>
+        <input class="outline-none text-lg p-2 border-b border-black mx-4 mt-4" type="text" placeholder="Enter your name" name="name" required>
+        <input class="outline-none text-lg p-2 border-b border-black mx-4 mt-4" type="email" placeholder="Enter Email address" name="email" required>
+        <input class="outline-none text-lg p-2 border-b border-black mx-4 mt-4" type="password" placeholder="Enter Password" name="password" required>
+        <input class="block bg-blue-500 text-white px-5 py-2 rounded-lg text-center mt-6 mx-auto" type="submit" value="REGISTER">
+    </form>
+    </div>
+    <div class="text-center mt-6">Already have an account? <a href="/owner/admin" class="text-blue-600">Login</a></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatch | Cart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include("./partials/navbar2") %>
+<div class="bg-white py-6 sm:py-8 lg:py-12">
+  <div class="mx-auto max-w-screen-lg px-4 md:px-8">
+    <div class="mb-6 sm:mb-10 lg:mb-16">
+      <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Your Cart</h2>
+    </div>
+
+    <div class="mb-6 flex flex-col gap-4 sm:mb-8 md:gap-6">
+      
+      <!-- product - start -->
+
+<% user.cart.forEach((product)=>{ %>
+  <div class="flex flex-wrap gap-x-4 overflow-hidden rounded-lg border sm:gap-y-4 lg:gap-6">
+        <a href="#" class="group relative block h-48 w-32 overflow-hidden bg-gray-100 sm:h-56 sm:w-40">
+          <img class="h-full w-full object-contain object-center transition duration-200 group-hover:scale-110" loading="lazy" src="data:image/png;base64,<%= product.image.toString('base64') %>" alt="<%= product.name %>" />
+        </a>
+
+        <div class="flex flex-1 flex-col justify-between py-4">
+          <div>
+            <p class="mb-1 inline-block text-lg font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-xl"><%= product.name %></p>
+
+            <span class="block text-gray-500">By: <%= product.brand %></span>
+            <!--
+            <span class="block text-gray-500">Description: <%= product.description %></span>
+            -->
+          </div>
+
+          <div>
+            <span class="product-price block font-bold mb-8 text-gray-800 md:text-lg" data-price="<%= product.price %>">Price: &#8377;<%= product.price.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}) %></span>
+
+           <!-- 
+            <span class="flex items-center gap-1 text-sm text-gray-500">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              in stock
+            </span>
+            -->
+          </div>
+        </div>
+
+        <div class="flex w-full justify-between border-t p-4 sm:w-auto sm:border-none sm:pl-0 lg:p-6 lg:pl-0">
+          <div class="flex flex-col items-start gap-2">
+            <div class="flex h-12 w-20 overflow-hidden rounded border">
+              <p type="number" class="qty w-full px-5 py-3 outline-none ring-inset ring-indigo-300 transition duration-100 focus:ring">1</p>
+
+              <div class="flex flex-col divide-y border-l">
+                <button class="inc-qty flex w-6 flex-1 select-none items-center justify-center items-center bg-white leading-none transition duration-100 hover:bg-gray-100 active:bg-gray-200">+</button>
+                <button class="dec-qty flex w-6 flex-1 select-none items-center justify-center bg-white leading-none transition duration-100 hover:bg-gray-100 active:bg-gray-200">-</button>
+              </div>
+            </div>
+
+            <button class="select-none text-sm font-semibold text-indigo-500 transition duration-100 hover:text-indigo-600 active:text-indigo-700">
+              <a href="/cart/remove/<%= product._id %>">Delete</a>
+            </button>
+          </div>
+<!--
+          <div class="ml-4 pt-3 md:ml-8 md:pt-2 lg:ml-16">
+            <span class="block font-bold text-gray-800 md:text-lg">Price: $<%= product.price %></span>
+          </div>
+          -->
+        </div>
+      </div>
+  <% }) %>
+</body>
+<script>
+  // Select all quantity containers
+  const qtyContainers = document.querySelectorAll(".qty")
+
+  qtyContainers.forEach((qtyEl, index) => {
+    const parent = qtyEl.closest(".flex"); // Get the closest container
+
+    const incBtn = parent.querySelector(".inc-qty");
+    const decBtn = parent.querySelector(".dec-qty");
+    const priceEl = parent.closest('.flex-wrap').querySelector(".product-price");
+  const unitPrice = parseFloat(priceEl.getAttribute("data-price"));
+    
+    incBtn.addEventListener("click", () => {
+  let currentQty = parseInt(qtyEl.textContent) + 1;
+  qtyEl.textContent = currentQty;
+  priceEl.innerHTML = `Price: &#8377;${(unitPrice * currentQty).toFixed(2)}`;
+});
+    
+    decBtn.addEventListener("click", () => {
+    let currentQty = parseInt(qtyEl.textContent);
+    if (currentQty > 1) {
+    currentQty -= 1;
+    qtyEl.textContent = currentQty;
+    priceEl.innerHTML = `Price: &#8377;${(unitPrice * currentQty).toFixed(2)}`;
+    }
+  });
+});
+</script>   
+</html>

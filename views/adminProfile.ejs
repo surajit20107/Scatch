@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/adminProfile.css">
+</head>
+<body>
+    <hero>
+        <header>
+            <nav class="flex justify-between h-12 p-2 bg-slate-800 text-white items-center">
+                <label class="text-2xl">
+                    Admin
+                </label>
+                <div>
+                    <ul class="flex gap-3 text-sm">
+                        <li>
+                            <a class="text-red-500 text-lg" href="/owner/logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <div class="p-2 text-lg">
+                <span>Welcome, </span><span id="admin-name" class="text-lg font-semibold"><%= admin.name %></span>
+            </div>
+            <div>
+                <div class="text-lg px-2">
+                    <p>Total Products: <%= allProducts.length %></p>
+                </div>
+                <div class="text-lg px-2 mt-2">
+                    <p>Total Users: <%= allUsers.length %></p>
+                </div>
+                <div class="btn-container">
+                    <a href="/owner/product/create">
+                        <button>Create Product</button>
+                    </a>
+                    <a href="/owner/product/manage">
+                        <button>Manage Product</button>
+                    </a>
+                    <a href="/owner/manage-users">
+                        <button>Manage Users</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </hero>
+</body>
+</html>

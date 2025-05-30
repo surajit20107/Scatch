@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scatch | Manage Products</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <%- include("./partials/adminNav") %>
+    <div class="mb-10 md:mb-16">
+      <h2 class="mt-3 mb-4 text-center text-2xl font-bold text-gray-800 md:mb-6 lg:text-3xl">Manage Products</h2>
+    </div>
+<div class="container flex flex-col">
+<% allProducts.forEach((product)=>{ %>
+    <div class="w-[85vw] bg-zinc-100 shadow-md shadow-zinc-400 rounded-lg mb-8 mx-auto">
+        <div class="group relative block h-82 overflow-hidden rounded-t-lg bg-grey-100">
+          <img class="h-40 w-auto object-contain mx-auto mt-2" src="data:image/png;base64,<%= product.image.toString('base64') %>" loading="lazy" alt="<%= product.name %>" class="h-full w-full object-contain object-center transition duration-200 group-hover:scale-110" />
+
+          <span class="absolute left-0 top-3 rounded-r-lg bg-red-500 px-3 py-1.5 text-sm font-semibold uppercase tracking-wider text-white"><%= Math.round(((product.mrp - product.price)/product.mrp)*100) %>% OFF
+          </span>
+            
+        </div>
+
+        <div class="flex items-start justify-between gap-2 rounded-b-lg bg-grey-900 p-4">
+          <div class="flex flex-col">
+            <p class="font-bold text-gray-800 transition duration-100 hover:text-gray-500 lg:text-lg"><%= product.name %></p>
+            <span class="text-sm text-gray-500 lg:text-base">by <%= product.brand %></span>
+          </div>
+
+          <div class="flex flex-col items-end">
+            <span class="font-bold text-gray-600 lg:text-lg">&#8377;<%= product.price.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits: 2}) %></span>
+              
+            <span class="text-sm text-red-500 line-through font-semibold">&#8377;<%= product.mrp.toLocaleString("en-IN", {minimumFractionDigits: 2, maximumFractionDigits:2 }) %></span>
+          </div>
+        </div>
+      
+      <div class="h-12 mb-12 px-2 mb-6 flex items-center justify-between">
+        <a href="/owner/delete/<%= product._id %>">
+          <button class="bg-[#E76B5E] text-white text-md py-2 px-4 w-24 rounded-lg">Delete</button>
+        </a>
+        <a href="/owner/edit/<%= product._id %>">
+          <button class="bg-[#E76B5E] text-white text-md py-2 px-4 w-24 rounded-lg">Edit</button>
+        </a>
+      </div>
+    </div>
+<% }) %>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatch | Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.7.2/css/all.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <%- include("./partials/adminNav") %>
+<div>
+    <div class="mt-6">
+        <h3 class="text-center text-2xl tracking-tight mb-4 font-bold">Create Product</h3>
+        <form action="/shop/product/create" method="post" enctype="multipart/form-data">
+            <label class="text-lg px-5" for="name">Product Name</label>
+            <input id="name" class="block mx-auto p-2 border-2 border-black outline-none rounded-md" type="text" placeholder="Product name" name="name" required>
+            
+            <label class="text-lg px-5 inline-block mt-4" for="description">Product Description</label>
+            <input id="description" class="block mx-auto p-2 border-2 border-black outline-none rounded-md" type="text" placeholder="Product description" name="description" required>
+            
+            <label class="text-lg px-5 inline-block mt-4" for="mrp">Product MRP</label>
+            <input id="mrp" class="block mx-auto p-2 border-2 border-black outline-none rounded-md" type="number" placeholder="Max Retail Price(MRP)" name="mrp" required>
+            
+            <label class="text-lg px-5 inline-block mt-4" for="price">Product Price</label>
+            <input id="price" class="block mx-auto p-2 border-2 border-black outline-none rounded-md" type="number" placeholder="Product price" name="price" required>
+            
+            <label class="text-lg px-5 inline-block mt-4" for="stock">Product Stock</label>
+            <input id="stock" class="block mx-auto p-2 border-2 border-black outline-none rounded-md" type="number" placeholder="Product stock" name="stock" required>
+            
+            <label class="text-lg px-5 inline-block mt-4" for="brand">Brand Name</label>
+            <input id="brand" class="block mx-auto p-2 border-2 border-black outline-none rounded-md" type="text" placeholder="Brand name" name="brand" required>
+            
+            <label class="text-lg px-5 inline-block mt-4" for="category">Product Category</label>
+            <input id="category" class="block mx-auto p-2 border-2 border-black outline-none rounded-md" type="text" placeholder="Product gategory" name="category" required>
+            <div class="mt-4 flex justify-center">
+            <input type="file" name="productImage" required>
+            </div>
+            <input class="block mx-auto my-8 px-3 py-3 bg-blue-600 text-white text-lg rounded-lg tracking-tight" type="submit" value="Create Product" required>
+        </form>
+
+    </div>
+</div>
+</body>
+</html>
